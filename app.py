@@ -5,8 +5,23 @@ from gradio.components import Markdown, Textbox, Button
 import pandas as pd
 import os
 
+from tools import MLFunctionSelector
+
+
 text_data = "Analysis Report:"
 report_file = "data/reports/analysis-"
+
+ml_function_selector = MLFunctionSelector()
+
+
+# anomaly_detection, assoc_rule_mining, k_means_clustering, kde, pca, gan, lda, nmf, self_organizing_maps, word_embeddings, vae
+def ml_function(selected_function=""):
+    global ml_function_selector
+    result = ml_function_selector.select_function(selected_function)
+    print(result)
+    yield result
+    return result
+
 
 
 def load_csv(file_path):
@@ -88,73 +103,133 @@ with gr.Blocks(title="Data Viewer", analytics_enabled=False) as chatbot:
         gr.Markdown("Welcome to Anomaly Detection!")
         with gr.Row():
             with gr.Column(scale=1):
-                dataset_dropdown = gr.Dropdown(get_datasets(), label="Dataset Directory:")
+                ml_input = gr.Textbox(value="anomaly_detection",  interactive=False)
+                analysis_output = gr.Textbox(lines=10, label="Dataset Analysis Report:")
+        with gr.Row():
+            with gr.Column(scale=1):
+                btn_ml = gr.Button(value="Run & Save ML Report")
+            btn_ml.click(fn=ml_function, inputs=ml_input, outputs=analysis_output)
     with gr.Tab("Associative Rule Mining"):
         gr.Markdown("# Associative Rule Mining")
         gr.Markdown("Welcome to Associative Rule Mining!")
         with gr.Row():
             with gr.Column(scale=1):
-                dataset_dropdown = gr.Dropdown(get_datasets(), label="Dataset Directory:")
+                ml_input = gr.Textbox(value="assoc_rule_mining",  interactive=False)
+                analysis_output = gr.Textbox(lines=10, label="Dataset Analysis Report:")
+        with gr.Row():
+            with gr.Column(scale=1):
+                btn_ml = gr.Button(value="Run & Save ML Report")
+            btn_ml.click(fn=ml_function, inputs=ml_input, outputs=analysis_output)
     with gr.Tab("Clustering"):
         gr.Markdown("# Clustering")
         gr.Markdown("Welcome to Clustering!")
         with gr.Row():
             with gr.Column(scale=1):
-                dataset_dropdown = gr.Dropdown(get_datasets(), label="Dataset Directory:")
+                ml_input = gr.Textbox(value="k_means_clustering",  interactive=False)
+                analysis_output = gr.Textbox(lines=10, label="Dataset Analysis Report:")
+        with gr.Row():
+            with gr.Column(scale=1):
+                btn_ml = gr.Button(value="Run & Save ML Report")
+            btn_ml.click(fn=ml_function, inputs=ml_input, outputs=analysis_output)
     with gr.Tab("Density Estimation"):
         gr.Markdown("# Density Estimation")
         gr.Markdown("Welcome to Density Estimation!")
         with gr.Row():
             with gr.Column(scale=1):
-                dataset_dropdown = gr.Dropdown(get_datasets(), label="Dataset Directory:")
+                ml_input = gr.Textbox(value="kde",  interactive=False)
+                analysis_output = gr.Textbox(lines=10, label="Dataset Analysis Report:")
+        with gr.Row():
+            with gr.Column(scale=1):
+                btn_ml = gr.Button(value="Run & Save ML Report")
+            btn_ml.click(fn=ml_function, inputs=ml_input, outputs=analysis_output)
     with gr.Tab("Dimensionality Reduction"):
         gr.Markdown("# Dimensionality Reduction")
         gr.Markdown("Welcome to Dimensionality Reduction!")
         with gr.Row():
             with gr.Column(scale=1):
-                dataset_dropdown = gr.Dropdown(get_datasets(), label="Dataset Directory:")
+                ml_input = gr.Textbox(value="pca",  interactive=False)
+                analysis_output = gr.Textbox(lines=10, label="Dataset Analysis Report:")
+        with gr.Row():
+            with gr.Column(scale=1):
+                btn_ml = gr.Button(value="Run & Save ML Report")
+            btn_ml.click(fn=ml_function, inputs=ml_input, outputs=analysis_output)
     with gr.Tab("GAN"):
         gr.Markdown("# GAN")
         gr.Markdown("Welcome to GAN!")
         with gr.Row():
             with gr.Column(scale=1):
-                dataset_dropdown = gr.Dropdown(get_datasets(), label="Dataset Directory:")
+                ml_input = gr.Textbox(value="gan",  interactive=False)
+                analysis_output = gr.Textbox(lines=10, label="Dataset Analysis Report:")
+        with gr.Row():
+            with gr.Column(scale=1):
+                btn_ml = gr.Button(value="Run & Save ML Report")
+            btn_ml.click(fn=ml_function, inputs=ml_input, outputs=analysis_output)
     with gr.Tab("LDA"):
         gr.Markdown("# LDA")
         gr.Markdown("Welcome to LDA!")
         with gr.Row():
             with gr.Column(scale=1):
-                dataset_dropdown = gr.Dropdown(get_datasets(), label="Dataset Directory:")
+                ml_input = gr.Textbox(value="lda",  interactive=False)
+                analysis_output = gr.Textbox(lines=10, label="Dataset Analysis Report:")
+        with gr.Row():
+            with gr.Column(scale=1):
+                btn_ml = gr.Button(value="Run & Save ML Report")
+            btn_ml.click(fn=ml_function, inputs=ml_input, outputs=analysis_output)
     with gr.Tab("NMF"):
         gr.Markdown("# NMF")
         gr.Markdown("Welcome to NMF!")
         with gr.Row():
             with gr.Column(scale=1):
-                dataset_dropdown = gr.Dropdown(get_datasets(), label="Dataset Directory:")
+                ml_input = gr.Textbox(value="nmf",  interactive=False)
+                analysis_output = gr.Textbox(lines=10, label="Dataset Analysis Report:")
+        with gr.Row():
+            with gr.Column(scale=1):
+                btn_ml = gr.Button(value="Run & Save ML Report")
+            btn_ml.click(fn=ml_function, inputs=ml_input, outputs=analysis_output)
     with gr.Tab("RNN"):
         gr.Markdown("# RNN")
         gr.Markdown("Welcome to RNN!")
         with gr.Row():
             with gr.Column(scale=1):
-                dataset_dropdown = gr.Dropdown(get_datasets(), label="Dataset Directory:")
+                ml_input = gr.Textbox(value="rnn",  interactive=False)
+                analysis_output = gr.Textbox(lines=10, label="Dataset Analysis Report:")
+        with gr.Row():
+            with gr.Column(scale=1):
+                btn_ml = gr.Button(value="Run & Save ML Report")
+            btn_ml.click(fn=ml_function, inputs=ml_input, outputs=analysis_output)
     with gr.Tab("Self Organizing Maps"):
         gr.Markdown("# Self Organizing Maps")
+        with gr.Row():
+            with gr.Column(scale=1):
+                ml_input = gr.Textbox(value="self_organizing_maps",  interactive=False)
+                analysis_output = gr.Textbox(lines=10, label="Dataset Analysis Report:")
         gr.Markdown("Welcome to Self Organizing Maps!")
         with gr.Row():
             with gr.Column(scale=1):
-                dataset_dropdown = gr.Dropdown(get_datasets(), label="Dataset Directory:")
+                btn_ml = gr.Button(value="Run & Save ML Report")
+            btn_ml.click(fn=ml_function, inputs=ml_input, outputs=analysis_output)
     with gr.Tab("VAE"):
         gr.Markdown("# VAE")
         gr.Markdown("Welcome to VAE!")
         with gr.Row():
             with gr.Column(scale=1):
-                dataset_dropdown = gr.Dropdown(get_datasets(), label="Dataset Directory:")
+                ml_input = gr.Textbox(value="vae",  interactive=False)
+                analysis_output = gr.Textbox(lines=10, label="Dataset Analysis Report:")
+        with gr.Row():
+            with gr.Column(scale=1):
+                btn_ml = gr.Button(value="Run & Save ML Report")
+            btn_ml.click(fn=ml_function, inputs=ml_input, outputs=analysis_output)
     with gr.Tab("Embeddings"):
         gr.Markdown("# Embeddings")
         gr.Markdown("Welcome to Embeddings!")
         with gr.Row():
             with gr.Column(scale=1):
-                dataset_dropdown = gr.Dropdown(get_datasets(), label="Dataset Directory:")
+                ml_input = gr.Textbox(value="word_embeddings",  interactive=False)
+                analysis_output = gr.Textbox(lines=10, label="Dataset Analysis Report:")
+        with gr.Row():
+            with gr.Column(scale=1):
+                btn_ml = gr.Button(value="Run & Save ML Report")
+            btn_ml.click(fn=ml_function, inputs=ml_input, outputs=analysis_output)
 
 
 
